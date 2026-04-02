@@ -5,7 +5,7 @@ set -euo pipefail
 # Validates that the regex blocks pushes to main/master
 # but allows pushes to branches containing "main"/"master" as substrings.
 
-PATTERN='git[[:space:]]+push[[:space:]].*[[:space:]](main|master)([[:space:]]|$)'
+PATTERN='git[[:space:]]+push[[:space:]].*([[:space:]]|:)(main|master)([[:space:]]|$)'
 
 pass=0
 fail=0
@@ -38,6 +38,8 @@ assert_blocked "git push origin master"
 assert_blocked "git push -u origin main"
 assert_blocked "git push --force origin main"
 assert_blocked "git push --force origin master"
+assert_blocked "git push origin test-results:main"
+assert_blocked "git push origin feature:master"
 
 echo ""
 echo "=== Should be ALLOWED ==="
