@@ -5,7 +5,7 @@ set -euo pipefail
 # Validates that the regex blocks pushes to main/master
 # but allows pushes to branches containing "main"/"master" as substrings.
 
-PATTERN='git[[:space:]]+push[[:space:]].*([[:space:]]|:|/|\+)(main|master)([[:space:]]|$)'
+PATTERN='git[[:space:]]+push[[:space:]].*[[:space:]:/+](main|master)([[:space:]]|$)'
 
 pass=0
 fail=0
